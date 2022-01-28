@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login socket={socket} />} />
-          <Route path="/agenda" element={<Agenda socket={socket} />}></Route>
+          <Route path="/agenda/:username" element={<Agenda socket={socket} />}></Route>
         </Routes>
       </BrowserRouter>
     </div>

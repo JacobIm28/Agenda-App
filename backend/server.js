@@ -25,8 +25,15 @@ io.on('connection', (socket) => {
 
   socket.on('join', ({ username }) => {
     console.log("joining")
-    utils.addUser(username)
-    socket.emit('message',`Welcome ${username}!`)
+    const user = utils.addUser(username)
+
+    socket.emit('message',`Welcome ${user}!`)
+
+    const userList = utils.getUsers()
+    const taskList = utils.getTasks()
+    console.log(userList)
+    io.emit('users', {users: userList})
+    io.emit('tasks', {tasks: taskList})
   })
 
   socket.on('message', ({username, message}) => {
@@ -41,10 +48,37 @@ io.on('connection', (socket) => {
     })
   })
 
+  socket.on('task', (task) => {
+    utils.addTask(task)
+
+    const taskList = utils.getTasks()
+
+    io.emit('tasks', {tasks: taskList})
+  })
+
+  socket.on('users', () => {
+    console.log('sending users')
+    const users = utils.getUsers()
+    socket.emit('users', {users})
+  })
+
+  socket.on('delete', () => {
+    utils.removeUser()
+  })
+
+  socket.on('deleteTask', (task) => {
+    utils.removeTask(task)
+
+    const updatedTasks = utils.getTasks()
+    console.log(updatedTasks)
+    io.emit('tasks', {tasks: updatedTasks})
+  })
+
   socket.on('disconnect', ({username}) => {
     utils.removeUser(username)
     socket.emit('message', `${username} has left the chat.`)
   })
+
 })
 
 server.listen(port, () => {

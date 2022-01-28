@@ -4,28 +4,23 @@ import { Link } from 'react-router-dom'
 import './styles/Login.css'
 
 function Login({ socket }) {
-  const handleSubmit = (e) => {
-    const username = e.target.elements.username.value
-    socket.emit('join', { username })
-  }
+  const [joined, toggleJoined] = useState(null)
+  const [username, setUsername] = useState("")
 
   return (
     <div className="container">
       <div className="center-form">
         <div className="form-box">
           <h1>Enter your information</h1>
-          <form onSubmit={handleSubmit} className='login-form'>
+          <form className="login-form">
             <label>Username</label>
             <br />
-            <input type="text" name="username" placeholder="Enter your display name" required />
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your display name" disabled={joined ? 'disabled' : ''} required />
             <br />
-            <button>Join</button>
+            <Link to={`/agenda/${username}`} params={{ username }}>
+              <button>Join</button>
+            </Link>
           </form>
-
-          <div className="links">
-            <Link className="link" to="/agenda">Go to the agenda</Link>
-          </div>
-          
         </div>
       </div>
     </div>
