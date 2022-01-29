@@ -14,7 +14,6 @@ function Agenda({ socket }) {
   const [viewMode, toggleViewMode] = useState(false)
   const [viewedTask, setViewedTask] = useState()
   const { username } = useParams()
-  const messagesEndRef = React.createRef()
 
   useEffect(() => {
     socket.emit('join', { username })
@@ -43,9 +42,7 @@ function Agenda({ socket }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     socket.emit('message', { username, message: e.target.elements.message.value })
-
     e.target.elements.message.value = ''
   }
 
@@ -104,8 +101,6 @@ function Agenda({ socket }) {
 
     toggleAddEvent(false)
   }
-
-  console.log(viewedTask)
 
   return (
     <div className="container">
@@ -171,7 +166,7 @@ function Agenda({ socket }) {
                   <button class="button" onClick={() => handleEdit(task)}>
                     <FaPen />
                   </button>
-                  <button class="button" onClick={() => handleDelete(task)}>
+                  <button class="button" onClick={() => {handleDelete(task)}}>
                     <FaTrash />
                   </button>
                 </div>

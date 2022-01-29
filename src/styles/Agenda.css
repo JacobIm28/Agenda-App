@@ -7,13 +7,13 @@
   display: flex;
 }
 
+/* Left sidebar */
 .sidebar {
   color: black;
   width: 17%;
   padding: 20px;
   overflow-y: scroll;
 }
-
 .user {
   margin: 10px;
   font-size: 10pt;
@@ -21,7 +21,6 @@
 h4 {
   font-size: 12pt;
 }
-
 .user-list {
   background-color: aliceblue;
   padding: 15px;
@@ -30,6 +29,7 @@ h4 {
   text-align: center;
 }
 
+/* */
 .main {
   width: 200%;
   display: grid;
@@ -111,7 +111,7 @@ span {
 .messages {
   border-top-left-radius: 5px;
   background-color: aliceblue;
-  padding: 20px;
+  padding: 10px;
   height: 100%;
   overflow-y: scroll;
 }

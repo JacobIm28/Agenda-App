@@ -1,10 +1,9 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './styles/Login.css'
 
 function Login({ socket }) {
-  const [joined, toggleJoined] = useState(null)
   const [username, setUsername] = useState("")
 
   return (
@@ -14,7 +13,7 @@ function Login({ socket }) {
           <h1>Welcome! <br />Choose a display name to view the agenda</h1>
           <form className="login-form">
             <br />
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your display name" disabled={joined ? 'disabled' : ''} required />
+            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your display name" required />
             <br />
             <Link to={`/agenda/${username}`} params={{ username }}>
               <button>Join</button>
