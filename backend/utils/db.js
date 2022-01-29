@@ -1,6 +1,30 @@
-const users = []
-const messages = []
-let tasks = []
+let users = []
+let messages = []
+let tasks = [{
+  title: 'Introduction',
+  time: '2 hours',
+  description: 'Quick intro!',
+  content: 'Who am I?  My name is Jacob Im, and I\'m studying Computer Science',
+  image: null
+},{
+  title: 'Topic 1',
+  time: '1 hour',
+  description: 'Customize the info to be displayed',
+  content: 'Any extra info can go here',
+  image: null
+},{
+  title: 'Topic 2',
+  time: '30 min',
+  description: 'Customize the info to be displayed',
+  content: 'Any extra info can go here',
+  image: null
+},{
+  title: 'Topic 3',
+  time: '3 hour',
+  description: '',
+  content: '',
+  image: null
+},]
 
 const addTask = (task) => {
   tasks.push(task)

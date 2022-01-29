@@ -25,12 +25,13 @@ h4 {
 .user-list {
   background-color: aliceblue;
   padding: 15px;
+  width:fit-content;
   border-radius: 20px;
   text-align: center;
 }
 
 .main {
-  width: 100%;
+  width: 200%;
   display: grid;
   grid-template-rows: auto auto 60% 30%;
   justify-content: center;
@@ -44,7 +45,7 @@ h4 {
 }
 
 .tasks {
-  width: 90%;
+  width: 800px;
   overflow-y: scroll;
   border-radius: 20px;
   padding: 20px;
@@ -119,11 +120,11 @@ span {
   border-radius: 5px;
 }
 .username {
-  font-size: 12pt;
+  font-size: 10pt;
+  margin-top: 15px;
   font-weight: bold;
 }
 .text {
-  margin-top: 6px;
   font-size: 10pt;
 }
 .username span {
