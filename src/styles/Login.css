@@ -4,11 +4,14 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgb(230, 223, 223);
 }
 
 .center-form {
   justify-content: center;
+}
+
+h1 {
+  margin-bottom: 0;
 }
 
 .form-box {
@@ -16,7 +19,6 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 40%;
   width: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -33,13 +35,6 @@
 .login-form {
   display: block;
   text-align: center;
-  margin-top: 40px;
-}
-
-.login-form label {
-  font-size: 15pt;
-  color: #9c9c9e;
-  margin-bottom: 10px;
 }
 
 .login-form input {
@@ -58,17 +53,3 @@
   margin-top: 7px;
 }
 
-.links {
-  display: flex;
-  justify-content: center;
-}
-
-.link {
-  bottom: 10%;
-  border: 1px solid black;
-  padding: 10px;
-  color: #505052;
-  border-radius: 10px;
-  transition: 0.2s ease-out;
-  margin-top: 6%;
-}

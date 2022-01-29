@@ -11,9 +11,8 @@ function Login({ socket }) {
     <div className="container">
       <div className="center-form">
         <div className="form-box">
-          <h1>Enter your information</h1>
+          <h1>Welcome! Choose a display name to view the agenda</h1>
           <form className="login-form">
-            <label>Username</label>
             <br />
             <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your display name" disabled={joined ? 'disabled' : ''} required />
             <br />

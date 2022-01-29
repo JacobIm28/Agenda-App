@@ -1,18 +1,6 @@
 const users = []
-const messages = [{
-  username: 'test',
-  time: new Date(),
-  text: 'TEsting 123'
-},{
-  username: 'Jacob',
-  time: new Date(),
-  text: 'Yo What\'s up'
-}]
-let tasks = [{
-  title: "Introduction",
-  time:"20 min",
-  description: "Intro for the meeting"
-}]
+const messages = []
+let tasks = []
 
 const addTask = (task) => {
   tasks.push(task)
@@ -37,15 +25,15 @@ const getTasks = () => {
   return tasks
 }
 
-const addUser = (username) => {
-  users.push(username)
+const addUser = (user) => {
+  users.push(user)
   console.log('users being stored: ', users)
-  return { username }
+  return user
 }
 
-const removeUser = (username) => {
-  users.splice(users.indexOf(username), 1)
-  return users
+const removeUser = (id) => {
+  const index = users.findIndex((user => user.id === id))
+  return users.splice(index, 1)[0]
 }
 
 const reset = () => {

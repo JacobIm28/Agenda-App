@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import './styles/Agenda.css'
-import { FaTrash, FaPlusCircle, FaPen } from 'react-icons/fa'
+import { FaTrash, FaPlusCircle, FaPen, FaWindowClose } from 'react-icons/fa'
 import moment from 'moment'
 
 function Agenda({ socket }) {
@@ -11,6 +11,8 @@ function Agenda({ socket }) {
   const [addEvent, toggleAddEvent] = useState(false)
   const [editMode, toggleEditMode] = useState(false)
   const [editedTask, setEditedTask] = useState(null)
+  const [viewMode, toggleViewMode] = useState(false)
+  const [viewedTask, setViewedTask] = useState()
   const { username } = useParams()
   const messagesEndRef = React.createRef()
 
@@ -32,6 +34,7 @@ function Agenda({ socket }) {
 
   const handleDelete = (task) => {
     socket.emit('deleteTask', task)
+    toggleViewMode(false)
   }
 
   const handleAdd = () => {
@@ -51,6 +54,11 @@ function Agenda({ socket }) {
     toggleEditMode(true)
   }
 
+  const handleView = (task) => {
+    toggleViewMode(true)
+    setViewedTask(task)
+  }
+
   const handleUpdate = (e) => {
     e.preventDefault()
 
@@ -58,6 +66,12 @@ function Agenda({ socket }) {
       title: e.target.elements.title.value,
       time: e.target.elements.time.value,
       description: e.target.elements.description.value,
+      content: e.target.elements.content.value,
+      image: null,
+    }
+    if (e.target.elements.image.files && e.target.elements.image.files[0]) {
+      let img = e.target.elements.image.files[0]
+      update.image = URL.createObjectURL(img)
     }
 
     socket.emit('update', { update, editedTask })
@@ -67,28 +81,39 @@ function Agenda({ socket }) {
 
   const handleForm = (e) => {
     e.preventDefault()
-    socket.emit('addevent', {
+
+    const event = {
       title: e.target.elements.title.value,
       time: e.target.elements.time.value,
       description: e.target.elements.description.value,
-    })
+      content: e.target.elements.content.value,
+      image: null,
+    }
+
+    if (e.target.elements.image.files && e.target.elements.image.files[0]) {
+      let img = e.target.elements.image.files[0]
+      event.image = URL.createObjectURL(img)
+    }
+
+    socket.emit('addevent', event)
 
     e.target.elements.title.value = ''
     e.target.elements.time.value = ''
     e.target.elements.description.value = ''
+    e.target.elements.content.value = ''
 
     toggleAddEvent(false)
   }
 
-  console.log(!taskList[0])
+  console.log(viewedTask)
 
   return (
     <div className="container">
       <div className="sidebar">
         <div className="user-list">
-          <h3>Members</h3>
+          <h4>Members</h4>
           {userList.map((user) => {
-            return <div className="user">{user}</div>
+            return <div className="user">{user.username}</div>
           })}
         </div>
       </div>
@@ -104,6 +129,8 @@ function Agenda({ socket }) {
                   <input type="text" name="title" placeholder={editedTask.title} required />
                   <input type="text" name="time" placeholder={editedTask.time} required />
                   <input type="text" name="description" placeholder={editedTask.description} required />
+                  <input type="text" name="content" placeholder="Provide any additional details" required />
+                  <input className="image" type="file" name="image" />
                   <button>Update </button>
                 </form>
               </div>
@@ -114,25 +141,29 @@ function Agenda({ socket }) {
               <form className="add-form" onSubmit={handleForm}>
                 <input type="text" name="title" placeholder="Title of this topic" required />
                 <input type="text" name="time" placeholder="Length of topic" required />
-                <input type="text" name="description" placeholder="Text description" required />
+                <input type="text" name="description" placeholder="Header" required />
+                <input type="text" name="content" placeholder="Provide any additional details" required />
+                <input className="image" type="file" name="image" />
                 <button>Add </button>
               </form>
             </div>
           ) : (
-            <button className="add-event" onClick={handleAdd}>
+            <button className="button" onClick={handleAdd}>
               <FaPlusCircle size={20} />
             </button>
           )}
         </div>
         {!taskList[0] ? (
-          <div>Nothing scheduled for this meeting</div>
+          <div className="tasks">
+            <div className="info">Nothing scheduled for this meeting</div>
+          </div>
         ) : (
           <div className="tasks">
             {taskList.map((task) => {
               return (
                 <div className="task">
                   <div className="info">
-                    <div className="task-title">
+                    <div className="task-title" onClick={() => handleView(task)}>
                       {task.title} - <span>{task.time}</span>
                     </div>
                     <div className="task-description">{task.description}</div>
@@ -149,6 +180,22 @@ function Agenda({ socket }) {
           </div>
         )}
       </div>
+      {viewMode && (
+        <div className="view-task">
+          <button class="button" onClick={() => toggleViewMode(false)}>
+            <FaWindowClose />
+          </button>
+          <div className="title-2">{viewedTask.title}</div>
+          <div className="view-time">{viewedTask.time}</div>
+
+          {viewedTask.image && (
+            <div className="image-container">
+              <img className="view-image" src={viewedTask.image} />
+            </div>
+          )}
+          <div className="view-info">{viewedTask.content}</div>
+        </div>
+      )}
       <div className="right-sidebar">
         <div className="chat-title">Chat</div>
         <div className="chat">

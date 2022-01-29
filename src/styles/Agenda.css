@@ -8,8 +8,7 @@
 }
 
 .sidebar {
-  color: white;
-  background: #000000;
+  color: black;
   width: 17%;
   padding: 20px;
   overflow-y: scroll;
@@ -17,11 +16,14 @@
 
 .user {
   margin: 10px;
-  font-size: 14pt;
+  font-size: 10pt;
+}
+h4 {
+  font-size: 12pt;
 }
 
 .user-list {
-  background-color: rgb(65, 65, 65);
+  background-color: aliceblue;
   padding: 15px;
   border-radius: 20px;
   text-align: center;
@@ -32,6 +34,8 @@
   display: grid;
   grid-template-rows: auto auto 60% 30%;
   justify-content: center;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .title {
@@ -40,18 +44,17 @@
 }
 
 .tasks {
-  width: 100%;
+  width: 90%;
   overflow-y: scroll;
-  background-color: rgb(230, 223, 223);
   border-radius: 20px;
   padding: 20px;
 }
 
 .task {
   display: flex;
-  background-color: rgb(211, 211, 211);
+  background-color: aliceblue;
   margin-top: 15px;
-  width: 600px;
+  width: 90%;
   padding: 20px;
   border-radius: 10px;
   border-width: 10px;
@@ -92,7 +95,7 @@ span {
   height: 60%;
   width: 25%;
   margin-top: 8%;
-  margin-right: 10%;
+  margin-right: 6%;
 }
 
 .chat-title {
@@ -112,20 +115,19 @@ span {
   overflow-y: scroll;
 }
 .message {
-  background-color: #dbd6d6;
-  padding: 5px;
-  margin: 5px;
+  margin: 7px;
   border-radius: 5px;
 }
 .username {
-  font-size: 17pt;
+  font-size: 12pt;
   font-weight: bold;
 }
 .text {
   margin-top: 6px;
+  font-size: 10pt;
 }
 .username span {
-  font-size: 13pt;
+  font-size: 10pt;
 }
 .chat-form input{
   border-radius: 5px;
@@ -135,10 +137,10 @@ span {
 }
 .chat-form button {
   height: 100%;
-  width: 23%;
+  width: auto;
   padding: 10px;
   border-width: 0px;
-  background-color: rgb(137, 139, 252);
+  background-color: rgb(154, 215, 255);
 }
 .chat-form :hover {
   transition: 0.2s ease-in;
@@ -168,6 +170,7 @@ span {
 
 .add-form input {
   margin-right: 10px;
+  margin-top: 5px;
   padding: 5px;
   border-radius: 5px;
 }
@@ -177,5 +180,39 @@ span {
 }
 .add-form :hover {
   transition: 0.2s ease-in;
-  background-color: #cfccff;
+  background-color: aliceblue;
+}
+.image {
+  width: 200px;
+}
+
+.view-task {
+  background-color: aliceblue;
+  border-radius: 10px;
+  width: 40%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  margin-top: 10%;
+  padding: 20px;
+  overflow-y: scroll;
+}
+.title-2 {
+  font-size: 20pt;
+  margin-top: 10%;
+  text-align: center;
+}
+.view-time {
+  color:rgb(50, 50, 124);
+  margin: 5%;
+  text-align: center;
+}
+.view-info {
+  margin: 20px;
+}
+.view-image {
+  width: 100%;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
 }

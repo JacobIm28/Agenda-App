@@ -25,12 +25,15 @@ io.on('connection', (socket) => {
 
   socket.on('join', ({ username }) => {
     console.log('joining')
-    const user = utils.addUser(username)
+    const user = utils.addUser({
+      id: socket.id,
+      username
+    })
 
     const m = utils.addMessage({
       username: 'Admin',
       time: new Date(),
-      text: `Welcome ${username}!`,
+      text: `Welcome ${user.username}!`,
     })
     const userList = utils.getUsers()
     const taskList = utils.getTasks()
@@ -83,14 +86,16 @@ io.on('connection', (socket) => {
     io.emit('tasks', { tasks })
   })
 
-  socket.on('disconnect', ({ username }) => {
-    const userList = utils.removeUser(username)
+  socket.on('disconnect', () => {
+    const deletedUser = utils.removeUser(socket.id)
     const messageList = utils.addMessage({
       username: 'Admin',
       time: new Date(),
-      text: `${username} has left the chat.`,
+      text: `${deletedUser.username} has left the chat.`,
     })
 
+    console.log('disconnecting')
+    const userList = utils.getUsers()
     io.emit('users', { users: userList })
     io.emit('messages', { messages: messageList })
   })
