@@ -1,41 +1,17 @@
 const users = []
-const messages = []
-const tasks = [{
+const messages = [{
+  username: 'test',
+  time: new Date(),
+  text: 'TEsting 123'
+},{
+  username: 'Jacob',
+  time: new Date(),
+  text: 'Yo What\'s up'
+}]
+let tasks = [{
   title: "Introduction",
-  time: '30 min',
-  description: 'Come join for a quick introduction'
-}, {
-  title: "Icebreaker",
-  time: '1 hour',
-  description: 'Play some icebreaker games'
-}, {
-  title: 'Meeting 1',
-  time: '2 hours',
-  description: 'Go over project design'
-}, {
-  title: "Introduction",
-  time: '30 min',
-  description: 'Come join for a quick introduction'
-}, {
-  title: "Icebreaker",
-  time: '1 hour',
-  description: 'Play some icebreaker games'
-}, {
-  title: 'Meeting 1',
-  time: '2 hours',
-  description: 'Go over project design'
-}, {
-  title: "Introduction",
-  time: '30 min',
-  description: 'Come join for a quick introduction'
-}, {
-  title: "Icebreaker",
-  time: '1 hour',
-  description: 'Play some icebreaker games'
-}, {
-  title: 'Meeting 1',
-  time: '2 hours',
-  description: 'Go over project design'
+  time:"20 min",
+  description: "Intro for the meeting"
 }]
 
 const addTask = (task) => {
@@ -44,7 +20,17 @@ const addTask = (task) => {
 }
 
 const removeTask = (task) => {
-  tasks.splice(tasks.indexOf(task), 1)
+  tasks = tasks.filter((x) => x.title !== task.title)
+  return task
+}
+
+const updateTask = (update, task) => {
+  console.log('task to update: ',task)
+  const index = tasks.findIndex(el => el.title === task.title)
+  console.log(index)
+  tasks[index] = update
+  console.log('tasks', tasks)
+  return tasks 
 }
 
 const getTasks = () => {
@@ -59,6 +45,7 @@ const addUser = (username) => {
 
 const removeUser = (username) => {
   users.splice(users.indexOf(username), 1)
+  return users
 }
 
 const reset = () => {
@@ -76,6 +63,7 @@ const getMessages = () => {
 
 const addMessage = (message) => {
   messages.push(message)
+  return messages
 }
 
 const removeMessage = (message) => {
@@ -85,6 +73,7 @@ const removeMessage = (message) => {
 export default {
   addTask,
   removeTask,
+  updateTask,
   getTasks,
   addUser,
   removeUser,
