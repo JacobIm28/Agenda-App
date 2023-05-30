@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# Run the server locally
+1. cd into the backend folder with 
+`cd backend`
+2. Start the server
+`npm run start`
+
+# Next, start the React app:
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
